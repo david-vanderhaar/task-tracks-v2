@@ -1,18 +1,20 @@
 <h1>Task Form</h1>
-	<form class="col s12 col m8 offset-m2 main-form" method="get" action="">
+	<form class="col s12 col m8 offset-m2 main-form" method="post" action="/tasks">
+	<!-- Encrypt -->
+	{{ csrf_field() }}
       <div class="row">
       <!-- Input New Task Name -->
         <div class="input-field col s6">
-          <input id="new_task_input" type="text" class="validate">
+          <input id="new_task_input" type="text" class="validate" name="task_name" required>
           <label for="new_task_input">Task Name</label>
         </div>
         <!-- Select Category For New Task -->
         <div class="input-field col s6">
-           <select id="category_select_input">
+           <select id="category_select_input" name="category_id">
 		      <option value="" disabled selected>Choose a Category</option>
-		      <option value="1">Option 1</option>
-		      <option value="2">Option 2</option>
-		      <option value="3">Option 3</option>
+		      @foreach ($categories as $category)
+		      <option value="{{$category['id']}}">{{$category['category_name']}}</option>
+		      @endforeach
 		      <option value="" disabled>Add/Remove Categories</option>
 		    </select>
 		    <label for="categoy_select_input">Category</label>
@@ -21,29 +23,29 @@
       <div class="row">
         <!-- Input Task Description -->
         <div class="input-field col s12">
-          <textarea id="task_desc" type="text" class="materialize-textarea"></textarea>
+          <textarea id="task_desc" type="text" class="materialize-textarea validate" name="task_desc"></textarea>
           <label for="task_desc">Describe your task</label>
         </div>
       </div>
       <div class="row">
       <!-- Input Task Start Time and Date -->
         <div class="input-field col s6">
-			<input type="date" class="datepicker" id="start_date">
+			<input value="{{$currentDate}}" type="date" class="datepicker" id="start_date" name="start_date" required>
         	<label for="start_date">Start Date</label>
         </div>
         <div class="input-field col s6">
-			<input type="text" class="timepicker" id="start_time">
+			<input value="{{$currentTime}}" type="text" class="timepicker" id="start_time" name="start_time" required>
         	<label for="start_time">Start Time</label>
         </div>
       </div>
       <div class="row">
       <!-- Input Task End Time and Date (If not using task timer) -->
         <div class="input-field col s6">
-			<input type="date" class="datepicker" id="end_date">
+			<input value="{{$currentDate}}" type="date" class="datepicker" id="end_date" name="end_date" required>
         	<label for="end_date">End Date</label>
         </div>
         <div class="input-field col s6">
-			<input type="text" class="timepicker" id="end_time">
+			<input type="text" class="timepicker" id="end_time" name="end_time" required>
         	<label for="end_time">End Time</label>
         </div>
       </div>

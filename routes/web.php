@@ -16,5 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks/', 'TasksController@index');
+Route::post('/tasks/', 'TasksController@saveTask');
+Route::delete('/tasks/{id}', 'TaskController@deleteTask');
 
-Route::get('/tasks/{id}', 'TasksController@show');
+// Route::get('/tasks/{id}', 'TasksController@show');
