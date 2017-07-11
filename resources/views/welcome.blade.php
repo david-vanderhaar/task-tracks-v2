@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Time Tracks V2
                 </div>
 
                 <div class="links">
