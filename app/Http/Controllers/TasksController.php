@@ -10,17 +10,26 @@ class TasksController extends Controller
 {
     public function index() {
 
-    	$tasks = Task::all();
+        $tasks = Task::all();
 
-    	return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks'));
+        // return view('tasks.components.newTaskForm', compact('tasks'));
     }
 
     public function show($id) {
 
-    	$task = Task::find($id);
+        $task = Task::find($id);
 
-    	dd($task['task_name']. ' ' . $task['category_id']);
+        dd($task['task_name']. ' ' . $task['category_id']);
 
-    	return view('tasks.show', compact('task'));
+        return view('tasks.show', compact('task'));
     }
+
+    //Inserting Tasks
+
+    //Inserting Categories
+
+    //Deleting Tasks
+
+    //Deleting Categories
 }
