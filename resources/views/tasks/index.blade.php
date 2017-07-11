@@ -17,4 +17,6 @@
 		<div class="row">@include('tasks.components.taskList')</div>
 	</div>
 </body>
+<!-- Initialize Materialze Components -->
+<script src="./js/myMaterialize.js"></script>
 </html>

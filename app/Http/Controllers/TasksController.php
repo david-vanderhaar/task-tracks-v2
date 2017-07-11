@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use \App\Task;
+use \App\Category;
 
 class TasksController extends Controller
 {
     public function index() {
 
         $tasks = Task::all();
+        $categories = Category::all();
 
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks', 'categories'));
         // return view('tasks.components.newTaskForm', compact('tasks'));
     }
 
