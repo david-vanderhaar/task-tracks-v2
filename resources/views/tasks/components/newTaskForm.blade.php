@@ -34,19 +34,27 @@
         	<label for="start_date">Start Date</label>
         </div>
         <div class="input-field col s6">
-			<input value="{{$currentTime}}" type="text" class="timepicker" id="start_time" name="start_time" required>
+			<input value="{{$currentTime}}" type="text" class="timepicker" id="start_time" name="start_time" required>			
         	<label for="start_time">Start Time</label>
         </div>
       </div>
       <div class="row">
       <!-- Input Task End Time and Date (If not using task timer) -->
         <div class="input-field col s6">
-			<input value="{{$currentDate}}" type="date" class="datepicker" id="end_date" name="end_date" required>
+			<input value="{{$currentDate}}" type="date" class="datepicker" id="end_date" name="end_date">
         	<label for="end_date">End Date</label>
         </div>
         <div class="input-field col s6">
-			<input type="text" class="timepicker" id="end_time" name="end_time" required>
+			<input type="text" class="timepicker" id="end_time" name="end_time">
         	<label for="end_time">End Time</label>
+			<!-- Hidden Input to combine start date and time then send to task controller -->
+        	<input type="text" id="task_start" name="task_start" hidden>
+
+        	<!-- Hidden Input to combine end date and time then send to task controller -->
+			<input type="text" id="task_end" name="task_end" hidden>
+
+			<!-- Hidden Input to hold calculated duration NOT IN USE-->
+			<input type="decimal" id="task_dur" name="task_dur" hidden>
         </div>
       </div>
       <div class="row">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use \App\Task;
 use \App\Category;
+use \Carbon\Carbon;
+use \DateTime;
 
 class TasksController extends Controller
 {
@@ -15,8 +17,9 @@ class TasksController extends Controller
         $categories = Category::all();
 
         //Date and Time
+        date_default_timezone_set('America/Louisville');
         $currentDate = date('Y-m-d');
-        $currentTime = date('g:i a');
+        $currentTime = date('g:iA');
 
         return view('tasks.index', compact('tasks', 'categories', 'currentDate', 'currentTime'));
         // return view('tasks.components.newTaskForm', compact('tasks'));
@@ -41,16 +44,28 @@ class TasksController extends Controller
         $taskTimeStart = $request->input('start_time');
         $taskDateEnd = $request->input('end_date');
         $taskTimeEnd = $request->input('end_time');
+        //Combine Date and Time
+        $startTask = $taskDateStart . ' ' . $taskTimeStart;
+        $endTask = $taskDateEnd . ' ' . $taskTimeEnd;
+        if ($taskDateEnd != null and $taskTimeEnd != null) {
+            $durDays = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%j');
+            $durHours = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%h');
+            $durMin = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%i');
+            //Calulate Duration
+            var_dump(($durDays * 24) + $durHours + ($durMin/60));
+            $task->task_dur = ($durDays * 24) + $durHours + ($durMin/60);
+        }
 
+        $task->task_start = $startTask;
+        $task->task_end = $endTask;
         $task->task_name = $request->input('task_name');
         $task->category_id = $request->input('category_id');
         $task->task_desc = $request->input('task_desc');
-        //Combine Date and Time
-        $task->task_start = $taskDateStart. ' ' . $taskTimeStart;
-        $task->task_end = $taskDateEnd. ' ' . $taskTimeEnd;
 
-        
+
         $task->save();
+
+        // Task::create(request(['task_name', 'task_desc', 'task_start', 'task_end', 'task_dur', 'category_id']));
 
         return redirect('tasks');
 

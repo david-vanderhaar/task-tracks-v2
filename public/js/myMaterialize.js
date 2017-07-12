@@ -22,3 +22,19 @@ $(document).ready(function() {
     ampmclickable: true, // make AM PM clickable
     aftershow: function(){} //Function for after opening timepicker  
   });
+
+//Combine Date and Time into hidden fields task_start and task_end
+  
+	//Grab values fields of task_start and task_end
+	var taskStartVal = $('#task_start');
+	var taskEndVal = $('#task_end');
+
+	$('#start_date, #end_date, #start_time, #end_time').change(function () {
+		//Grab values of dates and times
+		taskStartVal[0].value = $('#start_date').val() + ' ' + $('#start_time').val();
+		taskEndVal[0].value = $('#end_date').val() + ' ' + $('#end_time').val();
+		console.log(taskStartVal + '||' + taskEndVal);
+	});
+
+
+
