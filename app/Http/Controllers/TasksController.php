@@ -18,11 +18,11 @@ class TasksController extends Controller
 
         //Date and Time
         date_default_timezone_set('America/Louisville');
-        $currentDate = date('Y-m-d');
+        // $currentDate = Carbon::now()
+        $currentDate = date('j F, Y');
         $currentTime = date('g:iA');
 
         return view('tasks.index', compact('tasks', 'categories', 'currentDate', 'currentTime'));
-        // return view('tasks.components.newTaskForm', compact('tasks'));
     }
 
     public function show($id) {
@@ -48,11 +48,10 @@ class TasksController extends Controller
         $startTask = $taskDateStart . ' ' . $taskTimeStart;
         $endTask = $taskDateEnd . ' ' . $taskTimeEnd;
         if ($taskDateEnd != null and $taskTimeEnd != null) {
-            $durDays = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%j');
-            $durHours = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%h');
-            $durMin = DateTime::createFromFormat('Y-m-d g:iA', $endTask)->diff(DateTime::createFromFormat('Y-m-d g:iA', $startTask))->format('%i');
+            $durDays = Carbon::createFromFormat('j F, Y g:iA', $endTask)->day - (Carbon::createFromFormat('j F, Y g:iA', $startTask)->day);
+            $durHours = Carbon::createFromFormat('j F, Y g:iA', $endTask)->hour - (Carbon::createFromFormat('j F, Y g:iA', $startTask)->hour);
+            $durMin = Carbon::createFromFormat('j F, Y g:iA', $endTask)->minute - (Carbon::createFromFormat('j F, Y g:iA', $startTask)->minute);
             //Calulate Duration
-            var_dump(($durDays * 24) + $durHours + ($durMin/60));
             $task->task_dur = ($durDays * 24) + $durHours + ($durMin/60);
         }
 

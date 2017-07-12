@@ -30,7 +30,7 @@
       <div class="row">
       <!-- Input Task Start Time and Date -->
         <div class="input-field col s6">
-			<input value="{{$currentDate}}" type="date" class="datepicker" id="start_date" name="start_date" required>
+			<input value="{{$currentDate}}" type="text" class="datepicker" id="start_date" name="start_date" required>
         	<label for="start_date">Start Date</label>
         </div>
         <div class="input-field col s6">
@@ -41,7 +41,7 @@
       <div class="row">
       <!-- Input Task End Time and Date (If not using task timer) -->
         <div class="input-field col s6">
-			<input value="{{$currentDate}}" type="date" class="datepicker" id="end_date" name="end_date">
+			<input value="{{$currentDate}}" type="text" class="datepicker" id="end_date" name="end_date">
         	<label for="end_date">End Date</label>
         </div>
         <div class="input-field col s6">
