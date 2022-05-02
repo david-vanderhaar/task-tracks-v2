@@ -1,5 +1,7 @@
+# ARCHIVED (to keep a log of my development journey)
+
 # Time Tracks V2 
-### Imporving on the original Time Tracks App
+### Improving on the original Time Tracks App
 
 This project is focused on learning the Laravel framework via improving an app I originally made with vanilla PHP and PostgreQL. Check that out [Here](https://github.com/david-vanderhaar/task-keeper)
 
